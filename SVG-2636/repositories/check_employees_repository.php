@@ -22,19 +22,12 @@ class CheckEmployeesRepository extends BaseRepository
 
         return $result;
     }
-
-    public function reset()
-    {
-        $this->mysqliConnection->query("DELETE FROM `$this->table` WHERE `id` > 191");
-        $this->mysqliConnection->query("ALTER TABLE `$this->table` AUTO_INCREMENT = 192");
-    }
-
     public function generateDummyData($recordCount)
     {
         $this->mysqliConnection->query("INSERT INTO $this->table(`check_id`, `employee_id`, message)VALUES
 (
 '" . rand(1, $recordCount) . "',
-'" . rand(1, $recordCount + 81) . "',
+'" . rand(1, $recordCount) . "',
 '" . $this->randomizer->randomString(8, true, array(' ')). "'
 
 );");

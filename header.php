@@ -6,5 +6,3 @@ echo "\r\n";
 echo $colors->getColoredString('                                *** ', 'brown') . "AUTOMATED TEST for " .
     $colors->getColoredString('SVG-2636', 'green') .
     " migration script" . $colors->getColoredString(' *** ', 'brown') . "\r\n\r\n";
-echo $colors->getColoredString('                           RUNNING THIS SCRIPT WILL CLEANUP THE TARGET TABLES FOR MIGRATION!!!',
-        'red') . "\r\n\r\n";

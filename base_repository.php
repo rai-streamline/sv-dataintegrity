@@ -16,13 +16,8 @@ class BaseRepository
 
     public function truncate()
     {
-        //we can't actually truncate as table has foreign keys
-        $this->mysqliConnection->query('DELETE FROM `' . $this->table . '`')
-        or die($this->colors->getColoredString('ERROR ', 'red') .
-            $this->mysqliConnection->error . __FILE__ . ' ' . __LINE__ . "\r\n\r\n");
-        $this->mysqliConnection->query('ALTER TABLE `' . $this->table . '` AUTO_INCREMENT = 1')
-        or die($this->colors->getColoredString('ERROR ', 'red') .
-            $this->mysqliConnection->error . __FILE__ . ' ' . __LINE__ . "\r\n\r\n");
+      //trying truncate since we're turning off transactions
+        $this->mysqliConnection->query('TRUNCATE TABLE `' . $this->table . '`');
     }
 
     public function randomPick($items = 5, $fullPick = false) {
@@ -60,4 +55,12 @@ WHERE `$this->primaryKey` = $id");
         return $query->fetch_assoc();
     }
 
+    public function updateDataForRollback()
+    {
+        $query = $this->mysqliConnection->query("SELECT * FROM `$this->table` ORDER BY RAND() LIMIT 10");
+        $data = $query->fetch_all();
+        foreach ($data as $datum) {
+            $this->mysqliConnection->query("UPDATE `$this->table` SET `created_at` = NOW() WHERE `id` = '" . $datum[0] . "'");
+        }
+    }
 }

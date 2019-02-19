@@ -35,13 +35,11 @@ class EmployeesRepository extends BaseRepository
 
     public function deleteEmployees()
     {
-        $this->mysqliConnection->query("DELETE FROM `$this->table` WHERE `id` > 81");
-        $this->mysqliConnection->query("ALTER TABLE `$this->table` AUTO_INCREMENT = 82");
-    }
+        $this->mysqliConnection->query("TRUNCATE `$this->table`");    }
 
     public function generateDummyData()
     {
-        $this->mysqliConnection->query("INSERT INTO `streamline_local`.`$this->table`
+        $this->mysqliConnection->query("INSERT INTO `$this->table`
 (
 `employeelist_id`,
 `custom_id`,

@@ -1,0 +1,12 @@
+{
+    "name": "streamlineverify/ctr-migration-tests",
+    "description": "migration data integrity tests",
+    "type": "tests",
+    "authors": [
+        {
+            "name": "Rai Icasiano",
+            "email": "ronald.icasiano@streamlineverify.com"
+        }
+    ],
+    "require": {}
+}
